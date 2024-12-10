@@ -1,0 +1,195 @@
+/* Main container for the Movies View */
+.movies-view {
+  display: flex;
+  margin: 30px auto; /* Added auto for centering the container */
+  max-width: 1200px;  /* Max width to avoid it stretching too much */
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Left Sidebar for Genre List */
+.genres-container {
+  flex: 1;
+  padding: 30px 20px;
+  border-right: 2px solid #ddd;
+  height: calc(100vh - 60px); /* Adjusted height for full viewport with margins */
+  background-color: #fff;
+  overflow-y: auto;
+  border-radius: 12px 0 0 12px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+h3 {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+}
+
+/* Genre list styles */
+.genre-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+/* Genre Card Styling */
+.genre-card {
+  text-decoration: none;
+  color: #333;
+  padding: 14px 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.genre-card:hover {
+  background-color: #f0f0f0;
+  border-color: #aaa;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.genre-card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.genre-card:hover h4 {
+  color: #007bff;
+}
+
+/* Right Content Area: Movies */
+.movies-container {
+  flex: 3;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  height: calc(100vh - 60px); /* Adjusted height */
+  overflow-y: auto;
+}
+
+/* Flexbox for movies container */
+.movies-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; /* Increased gap between movie cards */
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+/* Movie Card Styling */
+.movie-card {
+  text-decoration: none;
+  color: #333;
+  width: 220px;  /* Slightly larger card width */
+  text-align: center;
+  border-radius: 12px;
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 10px;
+}
+
+.movie-card:hover {
+  transform: translateY(-8px);  /* Slightly more pronounced hover effect */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Movie Image Styling */
+.movie-image {
+  width: 100%;
+  height: 280px;  /* Standard height */
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.movie-image:hover {
+  transform: scale(1.05);
+}
+
+/* Movie Title Styling */
+.movie-card h3 {
+  margin-top: 10px;
+  font-size: 18px;  /* Slightly bigger font */
+  font-weight: 600;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.movie-card:hover h3 {
+  color: #007bff;
+}
+
+/* Button Styling for "Buy" */
+.buy-button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  width: 100%;
+  font-weight: bold;
+}
+
+.buy-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+.buy-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+/* Pagination Controls */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.pagination-button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 12px;  /* Rounded buttons */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.pagination-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+.pagination-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}

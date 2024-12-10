@@ -1,0 +1,19 @@
+.genre-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .genre-card {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    margin: 5px;
+    background-color: #d7d2d2;
+    border: 1px solid #000000;
+    border-radius: 4px;
+  }
+  
+  .genre-card:hover {
+    background-color: #f0f0f0;
+  }
+  

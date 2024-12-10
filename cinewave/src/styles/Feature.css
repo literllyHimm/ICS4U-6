@@ -1,0 +1,24 @@
+/* src/styles/Feature.css */
+.feature-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.movie-list {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.movie-card {
+  text-decoration: none;
+  color: black;
+  width: 150px;
+  text-align: center;
+}
+
+.movie-image {
+  width: 100%;
+  border-radius: 10px;
+}

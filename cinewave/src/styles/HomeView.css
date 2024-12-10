@@ -1,0 +1,12 @@
+/* src/styles/HomeView.css */
+.home-view {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .home-view h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #000000;
+  }
+  
