@@ -193,3 +193,40 @@ h3 {
   background-color: #aaa;
   cursor: not-allowed;
 }
+/* Button Styling for "Buy" */
+.buy-button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  width: 100%;
+  font-weight: bold;
+  display: flex;
+  justify-content: center; /* Center text */
+  align-items: center;
+}
+
+/* Hover Effect for "Buy" Button */
+.buy-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+/* Disabled/Added Button Styling */
+.buy-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.buy-button.added {
+  background-color: #28a745; /* Green color when added */
+}
+
+.buy-button.added:hover {
+  background-color: #218838; /* Darker green on hover when added */
+}

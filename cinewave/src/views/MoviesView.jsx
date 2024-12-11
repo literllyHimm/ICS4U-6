@@ -12,7 +12,7 @@ const MoviesView = () => {
   const location = useLocation();
   const genreId = new URLSearchParams(location.search).get('genre');
   
-  const { cart, addToCart } = useCart();  // Use the cart context
+  const { cart, addToCart, removeFromCart } = useCart();  // Use the cart context
 
   // List of specific genre IDs you want to display
   const specificGenres = [
@@ -113,10 +113,16 @@ const MoviesView = () => {
                   <h3>{movie.title}</h3>
                 </Link>
                 
-                {/* Button to add movie to cart */}
+                {/* Button to add/remove movie to/from cart */}
                 <button 
-                  onClick={() => addToCart(movie)}
-                  className="buy-button"
+                  onClick={() => {
+                    if (isMovieInCart(movie.id)) {
+                      removeFromCart(movie.id); // If the movie is already in the cart, remove it
+                    } else {
+                      addToCart(movie); // Otherwise, add the movie to the cart
+                    }
+                  }}
+                  className={`buy-button ${isMovieInCart(movie.id) ? 'added' : ''}`}
                 >
                   {isMovieInCart(movie.id) ? 'Added' : 'Buy'}
                 </button>

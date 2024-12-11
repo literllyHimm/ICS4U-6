@@ -1,72 +1,161 @@
-/* src/styles/SettingsView.css */
+/* Main container for the Register view */
+.register-view-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #4dbf00, #007bff); /* Gradient background */
+  font-family: 'Roboto', sans-serif;
+}
 
-.settings-view-container {
-    width: 80%;
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/* Styling for the register card */
+.register-card {
+  background-color: #1e1e1e;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Title of the register form */
+.register-title {
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* Form styling */
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #333;
+  color: white;
+  outline: none;
+}
+
+.input-group input:focus {
+  border-color: #4dbf00;
+  box-shadow: 0 0 5px rgba(77, 191, 0, 0.8);
+}
+
+/* Genre selection container */
+.genres-container {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.genres-container label {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+/* Scrollable genre container */
+.genres-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  flex-wrap: nowrap;
+  padding: 10px 0;
+  max-width: 100%;
+  height: 150px;
+  background-color: #2c2c2c;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.genres-scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.genres-scroll-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 8px;
+}
+
+.genres-scroll-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* Genre card style */
+.genre-card {
+  background-color: #333;
+  padding: 12px 15px;
+  border-radius: 8px;
+  text-align: center;
+  width: 130px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+
+.genre-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.genre-card input {
+  margin-right: 10px;
+}
+
+.genre-card label {
+  display: block;
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Register Button */
+.register-btn {
+  background-color: #4dbf00;
+  color: white;
+  padding: 12px 0;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.2rem;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-btn:hover {
+  background-color: #45a049;
+}
+
+/* Mobile responsiveness */
+@media only screen and (max-width: 768px) {
+  .register-card {
+    padding: 30px;
+    width: 90%;
   }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
+
+  .register-title {
+    font-size: 1.5rem;
   }
-  
-  .settings-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+
+  .input-group input {
+    padding: 10px;
   }
-  
-  .settings-form div {
-    display: flex;
-    flex-direction: column;
+
+  .register-btn {
+    padding: 10px 0;
   }
-  
-  label {
-    font-size: 1rem;
-    margin-bottom: 5px;
-  }
-  
-  input {
-    padding: 8px;
-    font-size: 1rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-  
-  input[disabled] {
-    background-color: #f0f0f0;
-    cursor: not-allowed;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  .success-message {
-    color: green;
-    text-align: center;
-    font-size: 1rem;
-    margin-top: 20px;
-  }
-  
-  p {
-    font-size: 1.2rem;
-    color: #777;
-    text-align: center;
-  }
-  
+}

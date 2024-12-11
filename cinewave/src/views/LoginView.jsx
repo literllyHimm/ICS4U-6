@@ -1,51 +1,57 @@
-// src/views/LoginView.jsx
-import React, { useContext, useState } from 'react';
-import { UserContext } from '../context/UserContext'; // Correctly import UserContext
+import React, { useState } from 'react';
 import '../styles/LoginView.css';
 
 const LoginView = () => {
-  const { user, login } = useContext(UserContext); // Use context directly
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
 
-  const handleLogin = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const userData = {
-      email,
-      password,
-    };
-    // Call the login function to set the user in context
-    login(userData);
+    // Add form submission logic here
+    console.log('Login form submitted');
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      {user ? (
-        <p>Welcome back, {user.email}</p>
-      ) : (
-        <form onSubmit={handleLogin}>
-          <div>
-            <label>Email:</label>
+    <div className="login-view-container">
+      <div className="login-card">
+        <h2 className="login-title">Welcome Back</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label>Email</label>
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
             />
           </div>
-          <div>
-            <label>Password:</label>
+          <div className="input-group">
+            <label>Password</label>
             <input
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
             />
           </div>
-          <button type="submit">Login</button>
+          <button type="submit" className="login-btn">Login</button>
         </form>
-      )}
+        <div className="signup-link">
+          <p>Don't have an account? <a href="/register">Sign up</a></p>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,26 +1,25 @@
-// src/views/SettingsView.jsx
-import React, { useState, useEffect } from 'react';
-import { useUserContext } from '../context/UserContext'; // Import the custom hook for UserContext
-import '../styles/SettingsView.css'; // Import the CSS for the settings view
+import React, { useState, useEffect } from "react";
+import { useUserContext } from "../context/UserContext"; // Import the custom hook for UserContext
+import "../styles/SettingsView.css"; // Import the CSS for the settings view
 
 const SettingsView = () => {
-  const { user, setUser } = useUserContext(); // Get the user and setUser functions from context
+  const { user, setUser } = useUserContext(); // Access user data and update function from context
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    preferredGenre: ''
+    firstName: "",
+    lastName: "",
+    email: "",
+    preferredGenre: "",
   });
-  const [message, setMessage] = useState(''); // To show success or error messages
+  const [message, setMessage] = useState(""); // For displaying success messages
 
-  // Update the form data with current user data when the component mounts
+  // Populate formData when user data is available
   useEffect(() => {
     if (user) {
       setFormData({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email, // Email is displayed but not editable
-        preferredGenre: user.preferredGenre || '' // Make sure there's a preferred genre if available
+        firstName: user.firstName || "",
+        lastName: user.lastName || "",
+        email: user.email || "",
+        preferredGenre: user.preferredGenre || "",
       });
     }
   }, [user]);
@@ -29,16 +28,24 @@ const SettingsView = () => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Update the user context with the new data
-    setUser({ ...user, ...formData });
-    setMessage('Your information has been updated successfully!'); // Show success message
+    // Update the UserContext with new data
+    setUser((prevUser) => ({
+      ...prevUser,
+      ...formData,
+    }));
+
+    // Provide user feedback
+    setMessage("Your information has been updated successfully!");
+
+    // Optionally, clear the success message after a delay
+    setTimeout(() => setMessage(""), 3000);
   };
 
   return (
@@ -46,57 +53,62 @@ const SettingsView = () => {
       <h2>Settings</h2>
 
       {user ? (
-        <div className="settings-form">
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="firstName">First Name</label>
-              <input
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-              />
-            </div>
+        <form onSubmit={handleSubmit} className="settings-form">
+          <div className="form-group">
+            <label htmlFor="firstName">First Name</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-            <div>
-              <label htmlFor="lastName">Last Name</label>
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-              />
-            </div>
+          <div className="form-group">
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-            <div>
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                disabled
-              />
-            </div>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              disabled
+            />
+          </div>
 
-            <div>
-              <label htmlFor="preferredGenre">Preferred Genre</label>
-              <input
-                type="text"
-                name="preferredGenre"
-                value={formData.preferredGenre}
-                onChange={handleChange}
-                placeholder="Enter preferred genre"
-              />
-            </div>
+          <div className="form-group">
+            <label htmlFor="preferredGenre">Preferred Genre</label>
+            <input
+              type="text"
+              id="preferredGenre"
+              name="preferredGenre"
+              value={formData.preferredGenre}
+              onChange={handleChange}
+              placeholder="Enter preferred genre"
+            />
+          </div>
 
-            <button type="submit">Save Changes</button>
-          </form>
+          <button type="submit" className="save-button">
+            Save Changes
+          </button>
 
-          {/* Display success or error messages */}
           {message && <p className="success-message">{message}</p>}
-        </div>
+        </form>
       ) : (
-        <p>Please log in to update your settings.</p>
+        <p className="error-message">Please log in to update your settings.</p>
       )}
     </div>
   );
