@@ -1,56 +1,110 @@
-/* src/styles/Login.css */
-
+/* Container for the login form */
 .login-container {
   width: 100%;
   max-width: 400px;
   margin: 50px auto;
-  padding: 20px;
-  background-color: #f7f7f7;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.login-container h2 {
+  padding: 30px;
+  background-color: #ffffff; /* Light, clean background for the form */
+  border-radius: 10px; /* Slightly larger radius for softer corners */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Subtle, smooth shadow for depth */
+  font-family: 'Roboto', sans-serif; /* Cleaner, modern font */
   text-align: center;
-  color: #333;
+  transition: box-shadow 0.3s ease; /* Smooth shadow transition on focus */
 }
 
+/* Login title */
+.login-container h2 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 20px; /* Increased margin for spacing */
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Form styling */
 .login-container form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px; /* Increased gap for better spacing */
+  align-items: center;
 }
 
+/* Input fields */
 .login-container input {
-  padding: 10px;
+  width: 100%;
+  padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 1rem;
+  background-color: #f8f8f8; /* Lighter background for inputs */
+  box-sizing: border-box; /* Ensure padding is inside the width */
+  transition: border 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
+/* Focus effect for inputs */
+.login-container input:focus {
+  border: 1px solid #007bff; /* Blue border on focus */
+  background-color: #ffffff; /* White background on focus */
+  outline: none; /* Remove default outline */
+}
+
+/* Submit button */
 .login-container button {
-  padding: 10px;
+  padding: 12px;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%; /* Make button take full width */
 }
 
+/* Hover effect for the button */
 .login-container button:hover {
   background-color: #0056b3;
+  transform: translateY(-3px); /* Slight lift effect on hover */
 }
 
+/* Button active state */
+.login-container button:active {
+  transform: translateY(2px); /* Button presses down on click */
+}
+
+/* Redirect link styling */
 .login-container .redirect-link {
-  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
 }
 
 .login-container .redirect-link a {
   color: #007bff;
   text-decoration: none;
+  transition: text-decoration 0.3s ease;
 }
 
 .login-container .redirect-link a:hover {
   text-decoration: underline;
+}
+
+/* Responsive Design for smaller screens */
+@media only screen and (max-width: 768px) {
+  .login-container {
+    padding: 25px;
+    width: 90%;
+    max-width: 360px; /* Ensure form is slightly smaller on mobile */
+  }
+
+  .login-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .login-container button {
+    font-size: 0.95rem;
+  }
+
+  .login-container input {
+    font-size: 1.1rem;
+  }
 }

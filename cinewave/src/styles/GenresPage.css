@@ -1,19 +1,59 @@
 .genre-list {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Add space between genre cards */
+  margin: 20px 0;
+  padding: 0 20px;
+}
+
+.genre-card {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 15px;
+  margin: 5px;
+  background-color: #d7d2d2;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.genre-card:hover {
+  background-color: #e8e8e8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.genre-card:active {
+  transform: translateY(2px); /* Slightly push down on click */
+}
+
+.genre-card span {
+  display: block;
+  color: #555;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+  .genre-list {
+    padding: 0 15px;
   }
-  
+
   .genre-card {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .genre-list {
+    padding: 0 10px;
+  }
+
+  .genre-card {
     padding: 10px;
-    margin: 5px;
-    background-color: #d7d2d2;
-    border: 1px solid #000000;
-    border-radius: 4px;
+    font-size: 0.95rem;
   }
-  
-  .genre-card:hover {
-    background-color: #f0f0f0;
-  }
-  
+}

@@ -1,8 +1,8 @@
 /* Main container for the Movies View */
 .movies-view {
   display: flex;
-  margin: 30px auto; /* Added auto for centering the container */
-  max-width: 1200px;  /* Max width to avoid it stretching too much */
+  margin: 30px auto;
+  max-width: 1200px; /* Max width to avoid stretching */
   background-color: #f9f9f9;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
@@ -15,7 +15,7 @@
   flex: 1;
   padding: 30px 20px;
   border-right: 2px solid #ddd;
-  height: calc(100vh - 60px); /* Adjusted height for full viewport with margins */
+  height: calc(100vh - 60px); /* Adjusted height for full viewport */
   background-color: #fff;
   overflow-y: auto;
   border-radius: 12px 0 0 12px;
@@ -89,7 +89,7 @@ h3 {
 .movies-box {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px; /* Increased gap between movie cards */
+  gap: 30px;
   justify-content: flex-start;
   margin-top: 20px;
 }
@@ -98,7 +98,7 @@ h3 {
 .movie-card {
   text-decoration: none;
   color: #333;
-  width: 220px;  /* Slightly larger card width */
+  width: 220px;
   text-align: center;
   border-radius: 12px;
   background-color: #fff;
@@ -106,17 +106,18 @@ h3 {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   padding: 10px;
+  position: relative;
 }
 
 .movie-card:hover {
-  transform: translateY(-8px);  /* Slightly more pronounced hover effect */
+  transform: translateY(-8px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Movie Image Styling */
 .movie-image {
   width: 100%;
-  height: 280px;  /* Standard height */
+  height: 280px;
   object-fit: cover;
   border-radius: 12px;
   transition: transform 0.3s ease;
@@ -129,7 +130,7 @@ h3 {
 /* Movie Title Styling */
 .movie-card h3 {
   margin-top: 10px;
-  font-size: 18px;  /* Slightly bigger font */
+  font-size: 1.1rem;
   font-weight: 600;
   color: #333;
   transition: color 0.3s ease;
@@ -152,66 +153,11 @@ h3 {
   font-size: 14px;
   width: 100%;
   font-weight: bold;
-}
-
-.buy-button:hover {
-  background-color: #0056b3;
-  transform: translateY(-3px);
-}
-
-.buy-button:disabled {
-  background-color: #aaa;
-  cursor: not-allowed;
-}
-
-/* Pagination Controls */
-.pagination-controls {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  margin-top: 30px;
 }
 
-.pagination-button {
-  padding: 12px 20px;
-  font-size: 1rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 12px;  /* Rounded buttons */
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.pagination-button:hover {
-  background-color: #0056b3;
-  transform: translateY(-3px);
-}
-
-.pagination-button:disabled {
-  background-color: #aaa;
-  cursor: not-allowed;
-}
-/* Button Styling for "Buy" */
-.buy-button {
-  background-color: #007bff;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: all 0.3s ease;
-  font-size: 14px;
-  width: 100%;
-  font-weight: bold;
-  display: flex;
-  justify-content: center; /* Center text */
-  align-items: center;
-}
-
-/* Hover Effect for "Buy" Button */
 .buy-button:hover {
   background-color: #0056b3;
   transform: translateY(-3px);
@@ -229,4 +175,41 @@ h3 {
 
 .buy-button.added:hover {
   background-color: #218838; /* Darker green on hover when added */
+}
+
+/* Pagination Controls */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.pagination-button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.pagination-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+.pagination-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+/* Focus State for Buttons and Inputs (Accessibility) */
+.buy-button:focus, 
+.pagination-button:focus {
+  outline: 2px solid #007bff; /* Visible outline for accessibility */
+  outline-offset: 2px;
 }

@@ -15,9 +15,9 @@ import Header from './Components/Header';
 const App = () => {
   return (
     <UserProvider> 
-      <CartProvider>  {/* Wrap your app with CartProvider */}
+      <CartProvider>  {}
         <Router>
-          <Header /> {/* Header will now render dynamic navigation links based on user state */}
+          <Header /> {}
           <Routes>
             <Route path="/" element={<HomeView />} />
             <Route path="/login" element={<LoginView />} />

@@ -9,6 +9,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
   border-radius: 10px;
   position: relative;
+  margin-bottom: 20px; /* Added bottom margin to separate from other sections */
 }
 
 /* Styling for the logo */
@@ -20,6 +21,12 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   color: #4dbf00; /* A bright green for a vibrant look */
+  transition: color 0.3s ease-in-out;
+}
+
+/* Hover effect for logo */
+.logo h1:hover {
+  color: #a9d100; /* A brighter green on hover */
 }
 
 /* Container for navigation links */
@@ -98,6 +105,7 @@
     flex-direction: column;
     gap: 15px;
     width: 100%;
+    text-align: center; /* Center the buttons on mobile */
   }
 
   .logo h1 {
@@ -110,5 +118,28 @@
   .logout-button {
     width: 100%; /* Buttons take full width on smaller screens */
     text-align: center;
+  }
+
+  .welcome-message {
+    margin-right: 0; /* Remove margin on smaller screens */
+    text-align: center;
+    font-size: 1rem; /* Adjust font size for mobile */
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .logo h1 {
+    font-size: 1.4rem; /* Adjust logo size on very small screens */
+  }
+
+  .auth-button,
+  .nav-button,
+  .logout-button {
+    font-size: 12px; /* Adjust button font size */
+    padding: 10px 20px; /* Reduce button size for mobile */
+  }
+
+  .welcome-message {
+    font-size: 0.9rem; /* Reduce font size for better fit */
   }
 }

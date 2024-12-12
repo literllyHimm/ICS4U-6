@@ -39,6 +39,16 @@ h2 {
   border: 1px solid #ccc;
   background-color: #333;
   color: white;
+  transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #4dbf00;
+  outline: none; /* Remove default outline */
+}
+
+.input-group input:focus::placeholder {
+  color: #ccc; /* Placeholder text color on focus */
 }
 
 /* Genre selection container */
@@ -118,8 +128,34 @@ button {
   transition: background-color 0.3s ease;
   width: 100%;
   margin-top: 20px;
+  display: inline-block;
 }
 
 button:hover {
   background-color: #45a049;
+}
+
+button:focus {
+  outline: 3px solid #4dbf00; /* Focus state for accessibility */
+  outline-offset: 2px;
+}
+
+button:active {
+  background-color: #388e3c; /* Slightly darker green when clicked */
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+  .register-view-container {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .input-group input {
+    font-size: 1rem;
+  }
+
+  .genres-scroll-container {
+    padding: 10px;
+  }
 }

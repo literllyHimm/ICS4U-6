@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useCart } from "../context/CartContext"; // Import useCart
+import { useCart } from "../context/CartContext"; 
 import "../styles/CartView.css";
-import axios from "axios"; // For API calls
+import axios from "axios"; 
 
 const CartView = () => {
-  const { cart, removeFromCart } = useCart(); // Access cart and removeFromCart from CartContext
-  const [movieDetails, setMovieDetails] = useState({}); // Store trailer details for each movie
-
+  const { cart, removeFromCart } = useCart();
+  const [movieDetails, setMovieDetails] = useState({});
   useEffect(() => {
-    // Fetch trailer details for each movie in the cart
     const fetchTrailers = async () => {
       const details = {};
       for (const movie of cart) {
@@ -16,7 +14,7 @@ const CartView = () => {
           const response = await axios.get(
             `https://api.themoviedb.org/3/movie/${movie.id}/videos`,
             {
-              params: { api_key: "YOUR_API_KEY" }, // Replace with your actual API key
+              params: { api_key: "9e9ae8b4151b5a20e5c95911ff07c4e4" },
             }
           );
           const trailers = response.data.results.filter(
@@ -25,11 +23,11 @@ const CartView = () => {
           if (trailers.length > 0) {
             details[movie.id] = `https://img.youtube.com/vi/${trailers[0].key}/0.jpg`;
           } else {
-            details[movie.id] = `https://image.tmdb.org/t/p/w200${movie.poster_path}`; // Fallback to poster
+            details[movie.id] = `https://image.tmdb.org/t/p/w200${movie.poster_path}`; 
           }
         } catch (error) {
           console.error("Error fetching trailer:", error);
-          details[movie.id] = `https://image.tmdb.org/t/p/w200${movie.poster_path}`; // Fallback to poster
+          details[movie.id] = `https://image.tmdb.org/t/p/w200${movie.poster_path}`; 
         }
       }
       setMovieDetails(details);
