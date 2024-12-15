@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import { useUserContext } from '../context/UserContext'; // Import the hook
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import '../styles/RegisterView.css';
 
 const RegisterView = () => {
   const { setUser } = useUserContext(); // Use the custom hook to access context
+  const navigate = useNavigate(); // Initialize navigate function
 
-  // Initialize the form state with empty values for the inputs
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
-    selectedGenres: [],
+    selectedGenres: [],  // Store selected genres here
   });
 
   const [errors, setErrors] = useState({});
 
-  // List of genres (you can add or remove genres as per your requirement)
   const genres = [
     { id: 28, name: 'Action' },
     { id: 80, name: 'Crime' },
@@ -36,15 +36,14 @@ const RegisterView = () => {
     { id: 878, name: 'Science Fiction' },
   ];
 
-  // Handle changes to the input fields
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
     if (type === 'checkbox') {
       setFormData((prevData) => {
         const updatedGenres = checked
-          ? [...prevData.selectedGenres, value] // Add the genre to selectedGenres array
-          : prevData.selectedGenres.filter((genre) => genre !== value); // Remove if unchecked
+          ? [...prevData.selectedGenres, value]
+          : prevData.selectedGenres.filter((genre) => genre !== value);
         return { ...prevData, selectedGenres: updatedGenres };
       });
     } else {
@@ -55,7 +54,6 @@ const RegisterView = () => {
     }
   };
 
-  // Validate the form data
   const validateForm = () => {
     const { firstName, lastName, email, password, confirmPassword, selectedGenres } = formData;
     let formErrors = {};
@@ -80,15 +78,12 @@ const RegisterView = () => {
     return isValid;
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Validate the form data before submitting
     if (validateForm()) {
-      // If valid, store the user data in context
-      setUser(formData); // Assuming setUser stores user data in context
+      setUser(formData); // Save user data, including selected genres
       alert('Registration successful!');
+      navigate('/login'); // Redirect to the login page
     } else {
       alert('Please fix the errors before submitting.');
     }
@@ -164,7 +159,6 @@ const RegisterView = () => {
         <button type="submit">Register</button>
       </form>
 
-      {/* Display error messages */}
       {errors.required && <p>{errors.required}</p>}
       {errors.passwordMatch && <p>{errors.passwordMatch}</p>}
       {errors.genres && <p>{errors.genres}</p>}

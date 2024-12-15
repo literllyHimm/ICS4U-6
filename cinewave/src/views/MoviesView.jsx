@@ -1,30 +1,59 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useLocation, Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';  // Importing useCart to interact with the cart context
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import { useUserContext } from '../context/UserContext';
 import '../styles/MoviesView.css';
 
 const MoviesView = () => {
+  const { user } = useUserContext(); 
   const [movies, setMovies] = useState([]);
-  const [genres, setGenres] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [allGenres, setAllGenres] = useState([]);
   const location = useLocation();
-  const genreId = new URLSearchParams(location.search).get('genre');
-  
-  const { cart, addToCart, removeFromCart } = useCart();  // Use the cart context
+  const navigate = useNavigate();
+  const genreId = new URLSearchParams(location.search).get('genre');  
+  const { cart, addToCart, removeFromCart } = useCart();
 
-  // List of specific genre IDs you want to display
-  const specificGenres = [
-    28, 80, 27, 53, 12, 10751, 10402, 10752, 16, 14, 9648, 37, 35, 36, 878
-  ];
+  
+  const fetchGenres = async () => {
+    const API_KEY = '9e9ae8b4151b5a20e5c95911ff07c4e4';
+    const BASE_URL = 'https://api.themoviedb.org/3/genre/movie/list';
+
+    try {
+      const response = await axios.get(BASE_URL, { params: { api_key: API_KEY } });
+      setAllGenres(response.data.genres);
+    } catch (error) {
+      console.error('Error fetching genres:', error);
+    }
+  };
 
   useEffect(() => {
-    fetchGenres();
+    fetchGenres(); 
+  }, []);
+
+  
+  useEffect(() => {
     if (genreId) {
-      fetchMovies(genreId, currentPage);
+      fetchMovies(genreId, currentPage); 
+    } else if (user?.selectedGenres?.length > 0) {
+      const genreIds = user.selectedGenres
+        .map((selectedGenre) => {
+          const genre = allGenres.find((g) => g.name === selectedGenre);
+          return genre ? genre.id : null;
+        })
+        .filter((id) => id !== null);  
+
+      if (genreIds.length > 0) {
+        fetchMoviesByGenres(genreIds, currentPage);
+      } else {
+        setMovies([]); 
+      }
+    } else {
+      fetchMovies(28, currentPage); 
     }
-  }, [genreId, currentPage]);  // Re-fetch movies when genreId or currentPage changes
+  }, [genreId, user, currentPage, allGenres]);
 
   const fetchMovies = async (genreId, page) => {
     const API_KEY = '9e9ae8b4151b5a20e5c95911ff07c4e4';
@@ -34,72 +63,104 @@ const MoviesView = () => {
       const response = await axios.get(BASE_URL, {
         params: { api_key: API_KEY, with_genres: genreId, page: page },
       });
+
       setMovies(response.data.results);
-      setTotalPages(response.data.total_pages);  // Set total pages based on the API response
+      setTotalPages(response.data.total_pages);
     } catch (error) {
       console.error('Error fetching movies:', error);
     }
   };
 
-  const fetchGenres = async () => {
+  const fetchMoviesByGenres = async (genreIds, page) => {
     const API_KEY = '9e9ae8b4151b5a20e5c95911ff07c4e4';
-    const BASE_URL = 'https://api.themoviedb.org/3/genre/movie/list';
+    const BASE_URL = 'https://api.themoviedb.org/3/discover/movie';
 
     try {
-      const response = await axios.get(BASE_URL, {
-        params: { api_key: API_KEY },
-      });
+      let allMovies = [];
 
-      // Filter genres based on the specific genres you want to display
-      const filteredGenres = response.data.genres.filter(genre =>
-        specificGenres.includes(genre.id)
-      );
+      
+      for (const genreId of genreIds) {
+        const response = await axios.get(BASE_URL, {
+          params: { api_key: API_KEY, with_genres: genreId, page },
+        });
 
-      setGenres(filteredGenres);
+        allMovies = [...allMovies, ...response.data.results];
+      }
+
+      
+      const uniqueMovies = Array.from(new Set(allMovies.map(movie => movie.id)))
+        .map(id => allMovies.find(movie => movie.id === id));
+
+      setMovies(uniqueMovies);
+      setTotalPages(1); 
     } catch (error) {
-      console.error('Error fetching genres:', error);
+      console.error('Error fetching movies by genres:', error);
+      setMovies([]);
     }
   };
 
-  // Handle "Previous" button click
   const handlePrevious = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
   };
 
-  // Handle "Next" button click
   const handleNext = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
   };
 
-  // Function to check if the movie is in the cart
+  const handleGenreClick = (genreId) => {
+    
+    navigate(`/movies?genre=${genreId}`);
+    setCurrentPage(1); 
+  };
+
   const isMovieInCart = (movieId) => {
     return cart.some(movie => movie.id === movieId);
   };
 
+  
+  const selectedGenres = allGenres.filter(genre =>
+    user?.selectedGenres?.includes(genre.name)
+  );
+
   return (
     <div className="movies-view">
-      {/* Left Sidebar: Genres */}
+      {/* Left Sidebar: Display User Selected Genres */}
       <div className="genres-container">
         <h3>Select a Genre</h3>
         <div className="genre-list">
-          {genres.map((genre) => (
-            <Link
-              key={genre.id}
-              to={`/movies?genre=${genre.id}`}
-              className="genre-card"
-            >
-              <h4>{genre.name}</h4>
-            </Link>
-          ))}
+          {selectedGenres.length > 0 ? (
+            selectedGenres.map((genre) => (
+              <button
+                key={genre.id}
+                onClick={() => handleGenreClick(genre.id)} 
+                className={`genre-card ${genre.id === parseInt(genreId) ? 'active' : ''}`}
+              >
+                <h4>{genre.name}</h4>
+              </button>
+            ))
+          ) : (
+            <p>Loading genres...</p>
+          )}
         </div>
       </div>
 
       {/* Right Content Area: Movies */}
       <div className="movies-container">
+        <div className="selected-genres">
+          <h3>Selected Genres:</h3>
+          <div className="selected-genres-list">
+            {user?.selectedGenres?.map((genre, index) => (
+              <span key={index} className="genre-item">
+                {genre}
+              </span>
+            ))}
+          </div>
+        </div>
+
         <div className="movies-box">
           {movies.length > 0 ? (
             movies.map((movie) => (
@@ -112,14 +173,14 @@ const MoviesView = () => {
                   />
                   <h3>{movie.title}</h3>
                 </Link>
-                
+
                 {/* Button to add/remove movie to/from cart */}
                 <button 
                   onClick={() => {
                     if (isMovieInCart(movie.id)) {
-                      removeFromCart(movie.id); // If the movie is already in the cart, remove it
+                      removeFromCart(movie.id);
                     } else {
-                      addToCart(movie); // Otherwise, add the movie to the cart
+                      addToCart(movie);
                     }
                   }}
                   className={`buy-button ${isMovieInCart(movie.id) ? 'added' : ''}`}
@@ -129,7 +190,7 @@ const MoviesView = () => {
               </div>
             ))
           ) : (
-            <p>No movies available for this genre.</p>
+            <p>No movies available for the selected genres.</p>
           )}
         </div>
 

@@ -2,12 +2,13 @@
 .movies-view {
   display: flex;
   margin: 30px auto;
-  max-width: 1200px; /* Max width to avoid stretching */
+  max-width: 1200px;
   background-color: #f9f9f9;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   height: 100%;
+  padding: 20px;
 }
 
 /* Left Sidebar for Genre List */
@@ -22,6 +23,7 @@
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
 }
 
+/* Title for Genre List */
 h3 {
   font-size: 1.4rem;
   color: #333;
@@ -33,12 +35,13 @@ h3 {
   text-align: center;
 }
 
-/* Genre list styles */
+/* Genre List Styling */
 .genre-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
   overflow-y: auto;
+  padding-right: 10px; /* Adds some padding for better spacing */
 }
 
 /* Genre Card Styling */
@@ -212,4 +215,44 @@ h3 {
 .pagination-button:focus {
   outline: 2px solid #007bff; /* Visible outline for accessibility */
   outline-offset: 2px;
+}
+
+/* Responsive Styles */
+
+/* For smaller screens (tablets) */
+@media (max-width: 768px) {
+  .movies-view {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .genres-container {
+    flex: none;
+    width: 100%;
+    border-right: none;
+    border-bottom: 2px solid #ddd;
+    padding: 20px;
+  }
+
+  .movies-container {
+    flex: none;
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+/* For mobile screens */
+@media (max-width: 480px) {
+  .movie-card {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .movies-box {
+    gap: 20px;
+  }
+
+  .buy-button {
+    font-size: 12px;
+  }
 }

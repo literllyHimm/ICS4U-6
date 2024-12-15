@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';  
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useUserContext } from '../context/UserContext'; // Import the user context
 import '../styles/GenresPage.css';
 
 const GenresPage = () => {
+  const { user } = useUserContext(); // Get user data from context
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
@@ -29,7 +31,12 @@ const GenresPage = () => {
         specificGenres.includes(genre.id)
       );
 
-      setGenres(filteredGenres);
+      // Filter the genres based on the selected genres in the user context
+      if (user && user.selectedGenres) {
+        setGenres(filteredGenres.filter(genre => user.selectedGenres.includes(genre.name)));
+      } else {
+        setGenres(filteredGenres);
+      }
     } catch (error) {
       console.error("Error fetching genres:", error);
     }

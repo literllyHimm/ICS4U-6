@@ -1,34 +1,45 @@
+/* Main container for the genres list */
 .genre-list {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Add space between genre cards */
+  gap: 15px; /* Space between genre cards */
   margin: 20px 0;
   padding: 0 20px;
+  max-width: 350px; /* Set max width for better layout control */
+  border-right: 2px solid #f0f0f0; /* Light border for separation */
 }
 
+/* Each genre card */
 .genre-card {
   text-decoration: none;
-  color: #ffffff;
-  padding: 15px;
+  color: #333; /* Darker color for text */
+  padding: 20px;
   margin: 5px;
-  background-color: #d7d2d2;
-  border: 1px solid #cccccc;
-  border-radius: 8px;
-  font-size: 1.1rem;
+  background-color: #f1f1f1; /* Soft background for contrast */
+  border: 1px solid #ddd; /* Lighter border color */
+  border-radius: 12px; /* Rounded corners for a smoother look */
+  font-size: 1.15rem;
   font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: space-between; /* Space for genre name and icon */
+  align-items: center;
+  padding-right: 30px; /* Space for icon */
 }
 
+/* Hover effect */
 .genre-card:hover {
-  background-color: #e8e8e8;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fafafa; /* Lighter on hover */
+  transform: translateY(-3px); /* Slight raise effect */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* More noticeable shadow */
 }
 
+/* Active (click) effect */
 .genre-card:active {
-  transform: translateY(2px); /* Slightly push down on click */
+  transform: translateY(1px); /* Slight push down on click */
 }
 
+/* Genre card text style */
 .genre-card span {
   display: block;
   color: #555;
@@ -36,24 +47,40 @@
   margin-top: 5px;
 }
 
+/* Icon style (if applicable) */
+.genre-card .icon {
+  font-size: 1.5rem; /* Larger icon for visual appeal */
+  color: #007bff; /* Color for the icon */
+  transition: color 0.3s ease;
+}
+
+/* Icon hover effect */
+.genre-card:hover .icon {
+  color: #0056b3; /* Darker color on hover */
+}
+
+/* Responsive styles for different screen sizes */
+
+/* For tablets and smaller devices (up to 768px) */
 @media (max-width: 768px) {
   .genre-list {
     padding: 0 15px;
   }
 
   .genre-card {
-    padding: 12px;
+    padding: 15px;
     font-size: 1rem;
   }
 }
 
+/* For small devices (up to 480px) */
 @media (max-width: 480px) {
   .genre-list {
     padding: 0 10px;
   }
 
   .genre-card {
-    padding: 10px;
+    padding: 12px;
     font-size: 0.95rem;
   }
 }

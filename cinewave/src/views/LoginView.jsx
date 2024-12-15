@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
+import { useUserContext } from '../context/UserContext'; // Import UserContext
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import '../styles/LoginView.css';
 
 const LoginView = () => {
+  const { user } = useUserContext(); // Access the registered user data from context
+  const navigate = useNavigate(); // Initialize navigate for redirection
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  const [error, setError] = useState(''); // To handle login errors
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,8 +24,14 @@ const LoginView = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add form submission logic here
-    console.log('Login form submitted');
+
+    // Check if entered credentials match the registered user data
+    if (user && formData.email === user.email && formData.password === user.password) {
+      alert('Login successful!');
+      navigate('/home'); // Redirect to the homepage or dashboard
+    } else {
+      setError('Invalid email or password. Please try again.');
+    }
   };
 
   return (
@@ -46,6 +59,7 @@ const LoginView = () => {
               placeholder="Enter your password"
             />
           </div>
+          {error && <p className="error-message">{error}</p>} {/* Display error message */}
           <button type="submit" className="login-btn">Login</button>
         </form>
         <div className="signup-link">
