@@ -8,14 +8,14 @@ const SettingsView = () => {
     firstName: "",
     lastName: "",
     email: "",
-    preferredGenre: "",  
+    preferredGenre: [],  
   });
   const [message, setMessage] = useState(""); 
+
   const allGenres = [
     "Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Fantasy", "Romance", "Thriller", "Mystery", "Documentary"
   ];
 
-  
   useEffect(() => {
     if (user) {
       setFormData({
@@ -52,10 +52,7 @@ const SettingsView = () => {
       ...formData,
     }));
 
-    
     setMessage("Your information has been updated successfully!");
-
-    
     setTimeout(() => setMessage(""), 3000);
   };
 
@@ -103,20 +100,18 @@ const SettingsView = () => {
           <div className="form-group">
             <label htmlFor="preferredGenre">Preferred Genre</label>
             <div className="genre-selection">
-              {allGenres
-                .filter((genre) => !formData.preferredGenre.includes(genre)) 
-                .map((genre) => (
-                  <label key={genre}>
-                    <input
-                      type="checkbox"
-                      name="preferredGenre"
-                      value={genre}
-                      checked={formData.preferredGenre.includes(genre)}
-                      onChange={handleChange}
-                    />
-                    {genre}
-                  </label>
-                ))}
+              {allGenres.map((genre) => (
+                <label key={genre}>
+                  <input
+                    type="checkbox"
+                    name="preferredGenre"
+                    value={genre}
+                    checked={formData.preferredGenre.includes(genre)}
+                    onChange={handleChange}
+                  />
+                  {genre}
+                </label>
+              ))}
             </div>
           </div>
 
