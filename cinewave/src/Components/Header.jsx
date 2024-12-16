@@ -1,16 +1,14 @@
   import React from 'react';
   import { Link } from 'react-router-dom';
-  import { useUserContext } from '../context/UserContext';  // To access user data
-  import { useCart } from '../context/CartContext'; // To access the cart
-  import '../styles/Header.css';  // Import the CSS for the header component
+  import { useUserContext } from '../context/UserContext';  
+  import { useCart } from '../context/CartContext'; 
+  import '../styles/Header.css';  
 
   const Header = () => {
-    const { user, setUser } = useUserContext();  // Access the user and setUser functions from UserContext
-    const { cart } = useCart();  // Access the cart from CartContext
-    
-    // Handle user logout
+    const { user, setUser } = useUserContext(); 
+    const { cart } = useCart(); 
     const handleLogout = () => {
-      setUser(null);  // Clear user data upon logout
+      setUser(null);  
     };
 
     return (

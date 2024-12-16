@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useUserContext } from '../context/UserContext'; // Import the hook
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useUserContext } from '../context/UserContext'; 
+import { useNavigate } from 'react-router-dom'; 
 import '../styles/RegisterView.css';
 
 const RegisterView = () => {
-  const { setUser } = useUserContext(); // Use the custom hook to access context
-  const navigate = useNavigate(); // Initialize navigate function
+  const { setUser } = useUserContext(); 
+  const navigate = useNavigate(); 
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -13,7 +13,7 @@ const RegisterView = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    selectedGenres: [],  // Store selected genres here
+    selectedGenres: [],  
   });
 
   const [errors, setErrors] = useState({});
@@ -81,9 +81,9 @@ const RegisterView = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      setUser(formData); // Save user data, including selected genres
+      setUser(formData); 
       alert('Registration successful!');
-      navigate('/login'); // Redirect to the login page
+      navigate('/login'); 
     } else {
       alert('Please fix the errors before submitting.');
     }

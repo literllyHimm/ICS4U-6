@@ -28,7 +28,7 @@ const Feature = () => {
     }
   };
 
-  // Function to get random movies
+
   const getRandomMovies = (moviesArray) => {
     const randomMovies = [];
     const selectedIndexes = new Set();

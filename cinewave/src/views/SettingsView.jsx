@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react"; 
-import { useUserContext } from "../context/UserContext"; // Import the custom hook for UserContext
-import "../styles/SettingsView.css"; // Import the CSS for the settings view
+import { useUserContext } from "../context/UserContext"; 
+import "../styles/SettingsView.css"; 
 
 const SettingsView = () => {
-  const { user, setUser } = useUserContext(); // Access user data and update function from context
+  const { user, setUser } = useUserContext(); 
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    preferredGenre: "",  // Preferred genre should now be an array
+    preferredGenre: "",  
   });
-  const [message, setMessage] = useState(""); // For displaying success messages
-
-  // List of all available genres (you can modify or fetch this list from an API)
+  const [message, setMessage] = useState(""); 
   const allGenres = [
     "Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Fantasy", "Romance", "Thriller", "Mystery", "Documentary"
   ];
 
-  // Populate formData when user data is available
+  
   useEffect(() => {
     if (user) {
       setFormData({
@@ -32,12 +30,11 @@ const SettingsView = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "preferredGenre") {
-      // Toggle the genre in the preferredGenre array
+    if (name === "preferredGenre") {   
       setFormData((prevData) => {
         const updatedGenres = prevData.preferredGenre.includes(value)
-          ? prevData.preferredGenre.filter((genre) => genre !== value)  // If already selected, remove
-          : [...prevData.preferredGenre, value];  // Otherwise, add it
+          ? prevData.preferredGenre.filter((genre) => genre !== value) 
+          : [...prevData.preferredGenre, value];  
         return { ...prevData, preferredGenre: updatedGenres };
       });
     } else {
@@ -49,18 +46,16 @@ const SettingsView = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Update the UserContext with new data
+    e.preventDefault();   
     setUser((prevUser) => ({
       ...prevUser,
       ...formData,
     }));
 
-    // Provide user feedback
+    
     setMessage("Your information has been updated successfully!");
 
-    // Optionally, clear the success message after a delay
+    
     setTimeout(() => setMessage(""), 3000);
   };
 
@@ -109,7 +104,7 @@ const SettingsView = () => {
             <label htmlFor="preferredGenre">Preferred Genre</label>
             <div className="genre-selection">
               {allGenres
-                .filter((genre) => !formData.preferredGenre.includes(genre)) // Filter out genres already selected
+                .filter((genre) => !formData.preferredGenre.includes(genre)) 
                 .map((genre) => (
                   <label key={genre}>
                     <input

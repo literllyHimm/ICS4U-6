@@ -51,30 +51,32 @@ h3 {
   padding: 14px 20px;
   border: 1px solid #ddd;
   border-radius: 12px;
-  background-color: #fff;
-  transition: all 0.3s ease;
+  background-color: #f1f1f1; /* Soft background for clarity */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-weight: 600;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 1; /* Ensures visibility */
 }
 
 .genre-card:hover {
-  background-color: #f0f0f0;
-  border-color: #aaa;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: #e8f4ff; /* Slight blue tint */
+  color: #007bff; /* Text visible on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .genre-card h4 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #333;
+  color: #333; /* Default text color */
   transition: color 0.3s ease;
 }
 
 .genre-card:hover h4 {
-  color: #007bff;
+  color: #007bff; /* Clear visibility on hover */
 }
 
 /* Right Content Area: Movies */
@@ -104,17 +106,19 @@ h3 {
   width: 220px;
   text-align: center;
   border-radius: 12px;
-  background-color: #fff;
+  background-color: #fff; /* Clear white background */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   padding: 10px;
   position: relative;
+  z-index: 1; /* Ensures visibility */
 }
 
 .movie-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  background-color: #fafafa; /* Subtle color shift */
 }
 
 /* Movie Image Styling */
@@ -123,6 +127,7 @@ h3 {
   height: 280px;
   object-fit: cover;
   border-radius: 12px;
+  background-color: #f0f0f0; /* Placeholder for empty images */
   transition: transform 0.3s ease;
 }
 
@@ -135,7 +140,7 @@ h3 {
   margin-top: 10px;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #333;
+  color: #333; /* Ensures readability */
   transition: color 0.3s ease;
 }
 
@@ -255,4 +260,12 @@ h3 {
   .buy-button {
     font-size: 12px;
   }
+}
+.movie-card {
+  color: #333 !important; /* Text color */
+  background-color: #fff !important; /* Background color */
+}
+
+.movie-image {
+  filter: none !important; /* Removes any unexpected filters */
 }

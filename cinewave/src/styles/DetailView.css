@@ -17,7 +17,7 @@
   font-size: 3rem;
   font-weight: 700;
   color: #2c3e50;
-  margin-bottom: 30px;
+  margin-bottom: 20px; /* Reduced margin for better spacing */
   text-transform: capitalize;
   letter-spacing: 1px;
 }
@@ -28,7 +28,7 @@
   height: auto;
   border-radius: 15px;
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
-  margin-bottom: 40px;
+  margin-bottom: 30px; /* Reduced margin */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -40,7 +40,7 @@
 .movie-details-view p {
   font-size: 1.3rem;
   color: #555;
-  margin-bottom: 30px;
+  margin-bottom: 20px; /* Reduced margin for spacing */
   line-height: 1.8;
   text-align: justify;
   padding: 0 20px;
@@ -50,7 +50,7 @@
 .info-box {
   background-color: #ffffff;
   padding: 25px 35px;
-  margin-top: 30px;
+  margin-top: 20px; /* Adjusted margin for consistent spacing */
   margin-bottom: 35px;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
@@ -61,7 +61,7 @@
 .info-box h3 {
   font-size: 1.5rem;
   color: #34495e;
-  margin: 15px 0;
+  margin: 10px 0; /* Reduced margin */
   font-weight: 600;
 }
 
@@ -120,4 +120,44 @@ a:hover {
 button:active,
 a:active {
   transform: translateY(2px);
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .movie-details-view {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .movie-poster {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .movie-details-view h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+
+  .movie-details-view p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+
+  .info-box {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .info-box h3 {
+    font-size: 1.4rem;
+  }
+
+  .trailer iframe {
+    height: 300px;
+  }
+
+  .trailer h3 {
+    font-size: 1.6rem;
+  }
 }
